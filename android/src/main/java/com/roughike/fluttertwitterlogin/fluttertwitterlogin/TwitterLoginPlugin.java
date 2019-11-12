@@ -2,7 +2,6 @@ package com.roughike.fluttertwitterlogin.fluttertwitterlogin;
 
 import android.content.Intent;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Twitter;
@@ -110,9 +109,8 @@ public class TwitterLoginPlugin extends Callback<TwitterSession> implements Meth
     }
 
     private void logOut(Result result, MethodCall call) {
-        CookieSyncManager.createInstance(registrar.context());
         CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.removeSessionCookie();
+        cookieManager.removeAllCookies(null);
 
         initializeAuthClient(call);
         TwitterCore.getInstance().getSessionManager().clearActiveSession();
